@@ -94,7 +94,7 @@ exports.handler = async (e) => {
 
   // grayscale: only true when bw is explicitly "1".
   // Original proxy used loose `0 != o` coercion — same result, made explicit here.
-  const grayscale = o === "1";
+ const grayscale = o === "1" || e.queryStringParameters.grayscale === "1";
 
   // Accept both param names for compatibility with original and our extension.
   const quality  = parseInt(q || l, 10) || DEFAULT_QUALITY;
