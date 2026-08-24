@@ -11,7 +11,7 @@ const fetch          = require("node-fetch");
 const shouldCompress = require("../util/shouldCompress");
 const compress       = require("../util/compress");
 
-const DEFAULT_QUALITY = 40;
+const DEFAULT_QUALITY = 20;
 
 const CORS_HEADERS = {
   "Access-Control-Allow-Origin":  "*",
@@ -94,7 +94,7 @@ exports.handler = async (e) => {
 
   // grayscale: only true when bw is explicitly "1".
   // Original proxy used loose `0 != o` coercion — same result, made explicit here.
- const grayscale = o === "1" || e.queryStringParameters.grayscale === "1";
+  const grayscale = o !== "0" && e.queryStringParameters.grayscale !== "0";
 
   // Accept both param names for compatibility with original and our extension.
   const quality  = parseInt(q || l, 10) || DEFAULT_QUALITY;
